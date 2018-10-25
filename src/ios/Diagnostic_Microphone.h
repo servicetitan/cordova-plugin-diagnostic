@@ -15,6 +15,7 @@
 @interface Diagnostic_Microphone : CDVPlugin
 
 - (void) isMicrophoneAuthorized: (CDVInvokedUrlCommand*)command;
+- (void) isOtherAudioPlaying: (CDVInvokedUrlCommand*)command;
 - (void) getMicrophoneAuthorizationStatus: (CDVInvokedUrlCommand*)command;
 - (void) requestMicrophoneAuthorization: (CDVInvokedUrlCommand*)command;
 

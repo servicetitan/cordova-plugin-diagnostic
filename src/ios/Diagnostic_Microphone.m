@@ -52,6 +52,31 @@ static NSString*const LOG_TAG = @"Diagnostic_Microphone[native]";
     }];
 }
 
+- (void) isOtherAudioPlaying: (CDVInvokedUrlCommand*)command
+{
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult* pluginResult;
+        @try {
+#ifdef __IPHONE_6_0
+            BOOL isOtherAudioPlaying = [[AVAudioSession sharedInstance] isOtherAudioPlaying];
+            
+            if (isOtherAudioPlaying == TRUE) {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:1];
+            }
+            else {
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:0];
+            }
+            [diagnostic sendPluginResultBool:isOtherAudioPlaying == TRUE :command];
+#else
+            [diagnostic sendPluginError:@"Only supported on iOS 6 and higher":command];
+#endif
+        }
+        @catch (NSException *exception) {
+            [diagnostic handlePluginException:exception :command];
+        };
+    }];
+}
+
 - (void) getMicrophoneAuthorizationStatus: (CDVInvokedUrlCommand*)command
 {
     [self.commandDelegate runInBackground:^{

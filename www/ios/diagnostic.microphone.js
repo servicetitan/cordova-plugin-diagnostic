@@ -58,6 +58,22 @@ var Diagnostic_Microphone = (function(){
     };
 
     /**
+     * Checks if other audio is playing in the background.
+     *
+     * @param {Function} successCallback - The callback which will be called when operation is successful.
+     * This callback function is passed a single boolean parameter which is TRUE if access to microphone is authorized.
+     * @param {Function} errorCallback -  The callback which will be called when operation encounters an error.
+     * This callback function is passed a single string parameter containing the error message.
+     */
+    Diagnostic_Microphone.isOtherAudioPlaying = function(successCallback, errorCallback) {
+        return cordova.exec(Diagnostic._ensureBoolean(successCallback),
+            errorCallback,
+            'Diagnostic_Microphone',
+            'isOtherAudioPlaying',
+            []);
+    };
+
+    /**
      * Returns the authorization status for the application to use the microphone for recording audio.
      *
      * @param {Function} successCallback - The callback which will be called when operation is successful.
