@@ -285,9 +285,10 @@
             </feature>
         </config-file>
 
-        <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.BLUETOOTH" />
+          <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
         </config-file>
+
 
         <js-module name="Diagnostic_Bluetooth" src="www/android/diagnostic.bluetooth.js">
             <merges target="cordova.plugins.diagnostic.bluetooth" />
